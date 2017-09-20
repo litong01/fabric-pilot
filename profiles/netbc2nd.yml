@@ -11,12 +11,33 @@ fabric: {
   tls: false,
 
   network: {
+    osfabric001: {
+      cas: [],
+      peers: [],
+      orderers: [],
+      zookeepers: [],
+      kafkas: []
+    },
     osfabric002: {
       cas: ["ca1st.orga"],
       peers: ["anchor@peer1st.orga", "anchor@peer1st.orgb"],
-      orderers: ["orderer1st.orgc", "orderer1st.orgd"],
+      orderers: ["orderer1st.orgc"],
       zookeepers: ["zookeeper1st"],
       kafkas: ["kafka1st"]
+    },
+    osfabric003: {
+      cas: [],
+      peers: [],
+      orderers: [],
+      zookeepers: [],
+      kafkas: []
+    },
+    osfabric004: {
+      cas: [],
+      peers: [],
+      orderers: [],
+      zookeepers: [],
+      kafkas: []
     }
   },
 
