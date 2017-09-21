@@ -41,7 +41,7 @@ cluster: {
 
   # the section defines preallocated IP addresses for each node, if there is no
   # preallocated IPs, leave it blank
-  node_ips: ["169.45.102.186", "169.45.102.187", "169.45.102.188"],
+  node_ips: ["169.45.102.186", "169.45.102.187", "169.45.102.188","169.45.125.49"],
 
   # fabric network node names expect to be using a clear pattern, this defines
   # the prefix for the node names.
