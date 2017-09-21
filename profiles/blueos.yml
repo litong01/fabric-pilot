@@ -45,15 +45,15 @@ cluster: {
 
   # fabric network node names expect to be using a clear pattern, this defines
   # the prefix for the node names.
-  name_prefix: "bluefabric",
+  name_prefix: "osfabric",
   domain: "fabricnet",
 
   # stack_size determines how many virtual or physical machines we will have
   # each machine will be named ${name_prefix}001 to ${name_prefix}${stack_size}
-  stack_size: 3,
+  stack_size: 4,
 
-  etcdnodes: ["bluefabric001", "bluefabric002", "bluefabric003"],
-  builders: ["bluefabric001"],
+  etcdnodes: ["osfabric001", "osfabric002", "osfabric003"],
+  builders: ["osfabric001"],
 
   flannel_repo: "http://10.0.10.11/fv0.7.1/flannel-v0.7.1-linux-amd64.tar.gz",
   etcd_repo: "http://10.0.10.11/etcdv3.2.0/etcd-v3.2.0-linux-amd64.tar.gz",
