@@ -1,0 +1,45 @@
+GIT_URL: "http://gerrit.hyperledger.org/r/fabric"
+
+GERRIT_REFSPEC: "refs/changes/13/13113/1"
+
+fabric: {
+
+  ssh_user: "ibmadmin",
+
+  peer_db: "CouchDB",
+  tls: false,
+
+  network: {
+    osfabric001: {
+      cas: ["ca1st.orga"],
+      peers: ["anchor@peer1st.orga", "anchor@peer1st.orgb"],
+      orderers: ["orderer1st.orgc", "orderer1st.orgd"],
+      zookeepers: ["zookeeper1st"],
+      kafkas: ["kafka1st"]
+    },
+    osfabric002: {
+      cas: ["ca1st.orgb"],
+      peers: ["worker@peer2nd.orga", "worker@peer2nd.orgb"],
+      orderers: ["orderer2nd.orgc", "orderer2nd.orgd"],
+      zookeepers: ["zookeeper2nd"],
+      kafkas: ["kafka2nd"]
+    },
+    osfabric003: {
+      cas: ["ca1st.orgc", "ca1st.orgd"],
+      peers: ["worker@peer3rd.orga", "worker@peer3rd.orgb"],
+      orderers: [],
+      zookeepers: ["zookeeper3rd"],
+      kafkas: ["kafka3rd"]
+    },
+    osfabric004: {
+      cas: [],
+      peers: [],
+      orderers: [],
+      zookeepers: [],
+      kafkas: []
+    }
+  },
+
+  baseimage_tag: "1.0.2",
+  ca: { tag: "1.0.2", admin: "admin", adminpw: "adminpw" }
+}
