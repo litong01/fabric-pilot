@@ -66,4 +66,4 @@
     server: "{{ inventory_hostname }}"
     volume: "{{ inventory_hostname }}_volume"
     device: "{{ cluster.block_device_name }}"
-when: cluster.volume_size > 0
+  when: cluster.volume_size > 0
