@@ -16,8 +16,8 @@ cluster: {
   validate_certs: False,
   private_net_name: "hypci",
   flavor_name: "v1-performance-2",
-  public_key_file: "{{ lookup('env','WORKSPACE') }}/src/agent/ansible/run/FDPublicKey",
-  private_key_file: "{{ lookup('env','WORKSPACE') }}/src/agent/ansible/run/FDPrivateKey",
+  public_key_file: "{{ lookup('env','WORKSPACE') }}/cello/src/agent/ansible/run/FDPublicKey",
+  private_key_file: "{{ lookup('env','WORKSPACE') }}/cello/src/agent/ansible/run/FDPrivateKey",
   # This variable indicate what IP should be used, only valid values are
   # private_ip or public_ip
   node_ip: "private_ip",
