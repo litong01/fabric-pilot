@@ -16,8 +16,8 @@ cluster: {
   validate_certs: False,
   private_net_name: "hypci",
   flavor_name: "v1-performance-2",
-  public_key_file: "{{ lookup('env','WORKSPACE') }}/FDPublicKey",
-  private_key_file: "{{ lookup('env','WORKSPACE') }}/FDPrivateKey",
+  public_key_file: "{{ lookup('env','WORKSPACE') }}/fd.pub",
+  private_key_file: "{{ lookup('env','WORKSPACE') }}/fd",
   # This variable indicate what IP should be used, only valid values are
   # private_ip or public_ip
   node_ip: "private_ip",
