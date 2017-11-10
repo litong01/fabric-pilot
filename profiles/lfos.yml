@@ -9,7 +9,7 @@ auth: {
 # This variable defines cloud provision attributes
 cluster: {
   target_os: "ubuntu",
-  image_name: "Ubuntu 16.04 - fabric - 20171101-2122",
+  image_name: "Ubuntu 16.04 - cello-ci-base - 20171111-1508",
   region_name: "",
   ssh_user: "ubuntu",
   availability_zone: "ca-ymq-2",
