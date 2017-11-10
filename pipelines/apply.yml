@@ -20,7 +20,7 @@
     timeout: 200
     flavor: "{{ cluster.flavor_name }}"
     network: "{{ cluster.private_net_name }}"
-    reuse_ips: False
+    auto_ip: no
     userdata: "{{ lookup('template', tp_path) }}"
     config_drive: "{{ cluster.config_drive | default('no') }}"
     security_groups: "fabric_sg"
