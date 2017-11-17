@@ -4,9 +4,9 @@ horizon_url: "https://rtpstack5.rtp.raleigh.ibm.com"
 
 auth: {
   auth_url: "https://rtpstack5.rtp.raleigh.ibm.com:5000/v3",
-  username: "{{ username | default(lookup('env', 'username')) }}",
-  password: "{{ password | default(lookup('env', 'password')) }}",
-  project_name: "hlfta",
+  username: *hypci_username,
+  password: *hypci_password,
+  project_name: *hypci_project_name,
   domain_name: "ibm"
 }
 
@@ -20,8 +20,8 @@ cluster: {
   validate_certs: False,
   private_net_name: "hlfta_network",
   flavor_name: "m1.medium",
-  public_key_file: "{{ lookup('env','WORKSPACE') }}/src/agent/ansible/run/publickey",
-  private_key_file: "{{ lookup('env','WORKSPACE') }}/src/agent/ansible/run/privatekey",
+  public_key_file: "{{ lookup('env','WORKSPACE') }}/fd.pub",
+  private_key_file: "{{ lookup('env','WORKSPACE') }}/fd",
   # This variable indicate what IP should be used, only valid values are
   # private_ip or public_ip
   node_ip: "private_ip",
