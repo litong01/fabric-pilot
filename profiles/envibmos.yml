@@ -1,4 +1,4 @@
----
+
 # This is an example configuration file when use ubuntu image.
 horizon_url: "https://rtpstack5.rtp.raleigh.ibm.com"
 
