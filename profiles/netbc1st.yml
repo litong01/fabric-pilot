@@ -31,6 +31,13 @@ fabric: {
       orderers: [],
       zookeepers: ["zookeeper3rd"],
       kafkas: ["kafka3rd"]
+    },
+    fabric004: {
+      cas: [],
+      peers: [],
+      orderers: [],
+      zookeepers: [],
+      kafkas: []
     }
   },
 
