@@ -20,8 +20,8 @@ cluster: {
   validate_certs: False,
   private_net_name: "hlfta_network",
   flavor_name: "m1.medium",
-  public_key_file: "{{ lookup('env','WORKSPACE') }}/fd.pub",
-  private_key_file: "{{ lookup('env','WORKSPACE') }}/fd",
+  public_key_file: "{{ lookup('env','WORKSPACE') }}/src/agent/ansible/run/publickey",
+  private_key_file: "{{ lookup('env','WORKSPACE') }}/src/agent/ansible/run/privatekey",
   # This variable indicate what IP should be used, only valid values are
   # private_ip or public_ip
   node_ip: "private_ip",
