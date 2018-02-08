@@ -8,7 +8,7 @@ fabric:
     adminpw: adminpw
   helper_tag: x86_64-1.1.0-preview
   network: 
-    fabric001: 
+    hlfta001: 
       cas: 
         - ca1st.orga
       kafkas: 
@@ -20,7 +20,7 @@ fabric:
         - worker@peer2nd.orga
       zookeepers: 
         - zookeeper1st
-    fabric002: 
+    hlfta002: 
       cas: 
         - ca1st.orgb
         - ca1st.orgc
@@ -35,7 +35,7 @@ fabric:
         - worker@peer2nd.orgc
       zookeepers: 
         - zookeeper2nd
-    fabric003: 
+    hlfta003: 
       cas: 
         - ca1st.orgd
         - ca1st.orge
@@ -50,7 +50,7 @@ fabric:
         - worker@peer2nd.orge
       zookeepers: 
         - zookeeper3rd
-    fabric004: 
+    hlfta004: 
       cas: 
         - ca1st.orgf
         - ca1st.orgg
@@ -65,7 +65,7 @@ fabric:
         - anchor@peer1st.orgh
         - worker@peer2nd.orgh
       zookeepers: []
-    fabric005: 
+    hlfta005: 
       cas: 
         - ca1st.orgi
         - ca1st.orgj
