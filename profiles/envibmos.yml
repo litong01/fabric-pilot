@@ -25,6 +25,7 @@ cluster: {
   # This variable indicate what IP should be used, only valid values are
   # private_ip or public_ip
   node_ip: "private_ip",
+  assign_public_ip: false,
 
   container_network: {
     Network: "172.16.0.0/16",
@@ -42,25 +43,25 @@ cluster: {
 
   # the section defines preallocated IP addresses for each node, if there is no
   # preallocated IPs, leave it blank
-  node_ips: ["9.42.40.116", "9.42.40.117", "9.42.40.119", "9.42.40.122"],
+  node_ips: [],
 
   # fabric network node names expect to be using a clear pattern, this defines
   # the prefix for the node names.
-  name_prefix: "osfabric",
+  name_prefix: "fabric",
   domain: "fabricnet",
 
   # stack_size determines how many virtual or physical machines we will have
   # each machine will be named ${name_prefix}001 to ${name_prefix}${stack_size}
-  stack_size: 4,
+  stack_size: 5,
 
-  etcdnodes: ["osfabric001", "osfabric002", "osfabric003"],
-  builders: ["osfabric001"],
+  etcdnodes: ["fabric001", "fabric002", "fabric003"],
+  builders: ["fabric005"],
 
   flannel_repo: "http://10.10.25.9/fv0.7.1/flannel-v0.7.1-linux-amd64.tar.gz",
   etcd_repo: "http://10.10.25.9/etcdv3.2.0/etcd-v3.2.0-linux-amd64.tar.gz",
   k8s_repo: "http://10.10.25.9/k8sv1.7.0/",
-
-  go_ver: "1.8.3",
+  go_repo: "https://dl.google.com/go/go1.9.2.linux-amd64.tar.gz",
+  
   # If volume want to be used, specify a size in GB, make volume size 0 if wish
   # not to use volume from your cloud
   volume_size: 0,
