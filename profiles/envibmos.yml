@@ -4,9 +4,9 @@ horizon_url: "https://rtpstack5.rtp.raleigh.ibm.com"
 
 auth: {
   auth_url: "https://rtpstack5.rtp.raleigh.ibm.com:5000/v3",
-  username: *hypci_username,
-  password: *hypci_password,
-  project_name: *hypci_project_name,
+  username: "{{ lookup('env','username') }}",
+  password: "{{ lookup('env','password') }}",
+  project_name: "hlfta",
   domain_name: "ibm"
 }
 
