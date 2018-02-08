@@ -12,27 +12,34 @@ fabric: {
 
   network: {
     fabric001: {
-      cas: ["ca1st.orga"],
-      peers: ["anchor@peer1st.orga", "anchor@peer1st.orgb"],
-      orderers: ["orderer1st.orgc", "orderer1st.orgd"],
+      cas: [],
+      peers: [],
+      orderers: ["orderer1st.orgo"],
       zookeepers: ["zookeeper1st"],
       kafkas: ["kafka1st"]
     },
     fabric002: {
-      cas: ["ca1st.orgb"],
-      peers: ["worker@peer2nd.orga", "worker@peer2nd.orgb"],
-      orderers: ["orderer2nd.orgc", "orderer2nd.orgd"],
+      cas: ["ca1st.orga"],
+      peers: ["anchor@peer1st.orga", "worker@peer2nd.orga"],
+      orderers: ["orderer2nd.orgo"],
       zookeepers: ["zookeeper2nd"],
       kafkas: ["kafka2nd"]
     },
     fabric003: {
-      cas: ["ca1st.orgc", "ca1st.orgd"],
-      peers: ["worker@peer3rd.orga", "worker@peer3rd.orgb"],
-      orderers: [],
+      cas: ["ca1st.orgb"],
+      peers: ["anchor@peer1st.orgb", "worker@peer2nd.orgb"],
+      orderers: ["orderer2nd.orgo"],
       zookeepers: ["zookeeper3rd"],
       kafkas: ["kafka3rd"]
     },
     fabric004: {
+      cas: ["ca1st.orgc"],
+      peers: ["anchor@peer1st.orgc", "worker@peer2nd.orgc"],
+      orderers: [],
+      zookeepers: ["zookeeper3rd"],
+      kafkas: ["kafka3rd"]
+    },
+    fabric005: {
       cas: [],
       peers: [],
       orderers: [],
