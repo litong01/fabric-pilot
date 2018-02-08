@@ -1,65 +1,88 @@
----
-GIT_URL: "http://gerrit.hyperledger.org/r/fabric"
-
+--- 
 GERRIT_REFSPEC: ""
-
-fabric: {
-
-  ssh_user: "ubuntu",
-
-  peer_db: "CouchDB",
-  tls: true,
-
-  network: {
-    fabric001: {
-      cas: [],
-      peers: [],
-      orderers: ["orderer1st.orgo"],
-      zookeepers: ["zookeeper1st"],
-      kafkas: ["kafka1st"]
-    },
-    fabric002: {
-      cas: ["ca1st.orga"],
-      peers: ["anchor@peer1st.orga", "worker@peer2nd.orga"],
-      orderers: ["orderer2nd.orgo"],
-      zookeepers: ["zookeeper2nd"],
-      kafkas: ["kafka2nd"]
-    },
-    fabric003: {
-      cas: ["ca1st.orgb"],
-      peers: ["anchor@peer1st.orgb", "worker@peer2nd.orgb"],
-      orderers: ["orderer2nd.orgo"],
-      zookeepers: ["zookeeper3rd"],
-      kafkas: ["kafka3rd"]
-    },
-    fabric004: {
-      cas: ["ca1st.orgc"],
-      peers: ["anchor@peer1st.orgc", "worker@peer2nd.orgc"],
-      orderers: [],
-      zookeepers: ["zookeeper3rd"],
-      kafkas: ["kafka3rd"]
-    },
-    fabric005: {
-      cas: [],
-      peers: [],
-      orderers: [],
-      zookeepers: [],
+GIT_URL: "http://gerrit.hyperledger.org/r/fabric"
+fabric: 
+  baseimage_tag: ""
+  ca: 
+    admin: admin
+    adminpw: adminpw
+  helper_tag: x86_64-1.1.0-preview
+  network: 
+    fabric001: 
+      cas: 
+        - ca1st.orga
+      kafkas: 
+        - kafka1st
+      orderers: 
+        - orderer1st.orgo
+      peers: 
+        - anchor@peer1st.orga
+        - worker@peer2nd.orga
+      zookeepers: 
+        - zookeeper1st
+    fabric002: 
+      cas: 
+        - ca1st.orgb
+        - ca1st.orgc
+      kafkas: 
+        - kafka2nd
+      orderers: 
+        - orderer2nd.orgo
+      peers: 
+        - anchor@peer1st.orgb
+        - worker@peer2nd.orgb
+        - anchor@peer1st.orgc
+        - worker@peer2nd.orgc
+      zookeepers: 
+        - zookeeper2nd
+    fabric003: 
+      cas: 
+        - ca1st.orgd
+        - ca1st.orge
+      kafkas: 
+        - kafka3rd
+      orderers: 
+        - orderer2nd.orgo
+      peers: 
+        - anchor@peer1st.orgd
+        - worker@peer2nd.orgd
+        - anchor@peer1st.orge
+        - worker@peer2nd.orge
+      zookeepers: 
+        - zookeeper3rd
+    fabric004: 
+      cas: 
+        - ca1st.orgf
+        - ca1st.orgg
+        - ca1st.orgh
       kafkas: []
-    }
-  },
-
-  baseimage_tag: "",
-  helper_tag: "x86_64-1.1.0-preview",
-  ca: { admin: "admin", adminpw: "adminpw" },
-  repo: {
-    # the url defines docker hub project access point
-    # official hub - url: "hyperledger/",
-    # fabric build hub - url: "nexus3.hyperledger.org:10001/hyperledger/",
-    url: "hyperledger/",
-
-    # locations to download fabric binaries. This url should point to a
-    # compressed such as tar or zip file which contains necessary binaries
-    # such as configtxgen, configtxlator, cryptogen etc.
+      orderers: []
+      peers: 
+        - anchor@peer1st.orgf
+        - worker@peer2nd.orgf
+        - anchor@peer1st.orgg
+        - worker@peer2nd.orgg
+        - anchor@peer1st.orgh
+        - worker@peer2nd.orgh
+      zookeepers: []
+    fabric005: 
+      cas: 
+        - ca1st.orgi
+        - ca1st.orgj
+        - ca1st.orgk
+      kafkas: []
+      orderers: []
+      peers: 
+        - anchor@peer1st.orgi
+        - worker@peer2nd.orgi
+        - anchor@peer1st.orgj
+        - worker@peer2nd.orgj
+        - anchor@peer1st.orgk
+        - worker@peer2nd.orgk
+      zookeepers: []
+  peer_db: CouchDB
+  repo: 
     bin: ""
-  }
-}
+    url: hyperledger/
+  ssh_user: ubuntu
+  tls: true
