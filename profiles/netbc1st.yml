@@ -60,6 +60,6 @@ fabric: {
     # locations to download fabric binaries. This url should point to a
     # compressed such as tar or zip file which contains necessary binaries
     # such as configtxgen, configtxlator, cryptogen etc.
-    bin: "
+    bin: ""
   }
 }
