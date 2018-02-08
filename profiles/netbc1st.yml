@@ -11,28 +11,28 @@ fabric: {
   tls: true,
 
   network: {
-    osfabric001: {
+    fabric001: {
       cas: ["ca1st.orga"],
       peers: ["anchor@peer1st.orga", "anchor@peer1st.orgb"],
       orderers: ["orderer1st.orgc", "orderer1st.orgd"],
       zookeepers: ["zookeeper1st"],
       kafkas: ["kafka1st"]
     },
-    osfabric002: {
+    fabric002: {
       cas: ["ca1st.orgb"],
       peers: ["worker@peer2nd.orga", "worker@peer2nd.orgb"],
       orderers: ["orderer2nd.orgc", "orderer2nd.orgd"],
       zookeepers: ["zookeeper2nd"],
       kafkas: ["kafka2nd"]
     },
-    osfabric003: {
+    fabric003: {
       cas: ["ca1st.orgc", "ca1st.orgd"],
       peers: ["worker@peer3rd.orga", "worker@peer3rd.orgb"],
       orderers: [],
       zookeepers: ["zookeeper3rd"],
       kafkas: ["kafka3rd"]
     },
-    osfabric004: {
+    fabric004: {
       cas: [],
       peers: [],
       orderers: [],
@@ -42,5 +42,17 @@ fabric: {
   },
 
   baseimage_tag: "",
-  ca: { tag: "1.0.2", admin: "admin", adminpw: "adminpw" }
+  helper_tag: "x86_64-0.4.5",
+  ca: { admin: "admin", adminpw: "adminpw" },
+  repo: {
+    # the url defines docker hub project access point
+    # official hub - url: "hyperledger/",
+    # fabric build hub - url: "nexus3.hyperledger.org:10001/hyperledger/",
+    url: "hyperledger/",
+
+    # locations to download fabric binaries. This url should point to a
+    # compressed such as tar or zip file which contains necessary binaries
+    # such as configtxgen, configtxlator, cryptogen etc.
+    bin: "
+  }
 }
