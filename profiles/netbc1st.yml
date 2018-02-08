@@ -49,7 +49,7 @@ fabric: {
   },
 
   baseimage_tag: "",
-  helper_tag: "x86_64-0.4.5",
+  helper_tag: "x86_64-1.1.0-alpha",
   ca: { admin: "admin", adminpw: "adminpw" },
   repo: {
     # the url defines docker hub project access point
