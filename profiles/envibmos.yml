@@ -18,7 +18,7 @@ cluster: {
   ssh_user: "ubuntu",
   availability_zone: "nova",
   validate_certs: False,
-  private_net_name: "hlfta_network",
+  private_net_name: "hlftanet",
   flavor_name: "m1.medium",
   public_key_file: "{{ lookup('env','WORKSPACE') }}/src/agent/ansible/run/publickey",
   private_key_file: "{{ lookup('env','WORKSPACE') }}/src/agent/ansible/run/privatekey",
