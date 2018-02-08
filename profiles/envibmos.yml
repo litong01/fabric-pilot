@@ -19,7 +19,7 @@ cluster: {
   availability_zone: "nova",
   validate_certs: False,
   private_net_name: "hlftanet",
-  flavor_name: "m1.medium",
+  flavor_name: "com.standard",
   public_key_file: "{{ lookup('env','WORKSPACE') }}/fabric-test/cello/src/agent/ansible/run/publickey",
   private_key_file: "{{ lookup('env','WORKSPACE') }}/fabric-test/cello/src/agent/ansible/run/privatekey",
   # This variable indicate what IP should be used, only valid values are
