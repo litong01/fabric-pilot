@@ -49,13 +49,13 @@ fabric: {
   },
 
   baseimage_tag: "",
-  helper_tag: "x86_64-0.4.5",
+  helper_tag: "x86_64-1.1.0-preview",
   ca: { admin: "admin", adminpw: "adminpw" },
   repo: {
     # the url defines docker hub project access point
     # official hub - url: "hyperledger/",
     # fabric build hub - url: "nexus3.hyperledger.org:10001/hyperledger/",
-    url: "nexus3.hyperledger.org:10001/hyperledger/",
+    url: "hyperledger/",
 
     # locations to download fabric binaries. This url should point to a
     # compressed such as tar or zip file which contains necessary binaries
