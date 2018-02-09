@@ -1,0 +1,21 @@
+- name: Get start timestamp
+  hosts: allnodes
+  strategy: free
+  user: "{{ user }}"
+  become: true
+  become_user: root
+  tasks:
+    - name: Unpack nmon binaries
+      unarchive:
+        src: "https://ayera.dl.sourceforge.net/project/nmon/nmon16g_x86.tar.gz"
+        dest: "/usr/local/bin"
+        exclude:
+          - nmon16g_x86_sles114
+          - nmon16g_x86_sles12
+          - nmon16g_x86_fedora25
+          - nmon16g_x86_rhel72
+        copy: no
+        mode: +x
+
+    - name: Start nmon
+      command: "nmon16g_x86_ubuntu1604 -fT -s 30 -m /opt -F {{inventory_hostname}}.nmon"
