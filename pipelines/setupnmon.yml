@@ -18,4 +18,4 @@
         mode: +x
 
     - name: Start nmon
-      command: "nmon16g_x86_ubuntu1604 -fT -s 30 -m /opt -F {{inventory_hostname}}.nmon"
+      command: "nmon16g_x86_ubuntu1604 -fT -s 30 -m /opt -F {{ hostvars[inventory_hostname].inter_name }}.nmon"
