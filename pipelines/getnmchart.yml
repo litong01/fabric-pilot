@@ -1,6 +1,8 @@
 - name: Get start timestamp
   hosts: cloud
   connection: local
+  become: true
+  become_user: root
   tasks:
     - name: Get a build number
       set_fact:
