@@ -1,19 +1,5 @@
-- name: Get start timestamp
-  hosts: cloud
-  connection: local
-  tasks:
-    - name: Get a build number
-      set_fact:
-        buildno: "{{ lookup('env', 'BUILD_NUMBER') }}"
-    - name: Get nmon chart target directory
-      set_fact:
-        targetdir: "{{ ansible_date_time.date }}-{{ buildno }}"
-    - name: Setup hyperledger directory
-      file:
-        path: "{{ targetdir }}"
-        state: directory
 
-- name: Get start timestamp
+- name: Setup nmon and nmon chart
   hosts: allnodes
   strategy: free
   user: "{{ user }}"

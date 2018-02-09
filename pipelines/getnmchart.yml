@@ -10,7 +10,7 @@
         targetdir: "{{ ansible_date_time.date }}-{{ buildno }}"
     - name: Setup hyperledger directory
       file:
-        path: "{{ targetdir }}"
+        path: "/var/www/html/{{ targetdir }}"
         state: directory
 
 - name: Get start timestamp
