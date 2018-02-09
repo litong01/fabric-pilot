@@ -9,7 +9,7 @@
         buildno: "{{ lookup('env', 'BUILD_NUMBER') }}"
     - name: Get nmon chart target directory
       set_fact:
-        targetdir: "{{ ansible_date_time.date }}-{{ buildno }}"
+        targetdir: "{{ ansible_date_time.date }}B{{ buildno }}"
     - name: Setup hyperledger directory
       file:
         path: "/var/www/html/{{ targetdir }}"
