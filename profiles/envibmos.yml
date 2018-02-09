@@ -47,15 +47,15 @@ cluster: {
 
   # fabric network node names expect to be using a clear pattern, this defines
   # the prefix for the node names.
-  name_prefix: "ohlfta",
+  name_prefix: "wfabric",
   domain: "fabricnet",
 
   # stack_size determines how many virtual or physical machines we will have
   # each machine will be named ${name_prefix}001 to ${name_prefix}${stack_size}
   stack_size: 5,
 
-  etcdnodes: ["ohlfta001", "ohlfta002", "ohlfta003"],
-  builders: ["ohlfta005"],
+  etcdnodes: ["wfabric001", "wfabric002", "wfabric003"],
+  builders: ["wfabric005"],
 
   flannel_repo: "http://10.10.25.61/fv0.7.1/flannel-v0.7.1-linux-amd64.tar.gz",
   etcd_repo: "http://10.10.25.61/etcdv3.2.0/etcd-v3.2.0-linux-amd64.tar.gz",
