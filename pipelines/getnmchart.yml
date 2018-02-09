@@ -1,0 +1,16 @@
+- name: Get start timestamp
+  hosts: allnodes
+  strategy: free
+  user: "{{ user }}"
+  become: true
+  become_user: root
+  tasks:
+    - name: create nmonchart
+      command: >-
+        nmonchart /opt/{{ hostvars[inventory_hostname].inter_name }}.nmon
+        /opt/{{ hostvars[inventory_hostname].inter_name }}.html
+
+    - name: gather nmonchart
+      fetch:
+        src: "/opt/{{ hostvars[inventory_hostname].inter_name }}.html"
+        dest: "/var/www/html/"
