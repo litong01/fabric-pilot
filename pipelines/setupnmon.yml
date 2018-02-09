@@ -4,7 +4,7 @@
   tasks:
     - name: Get a build number
       set_fact:
-        buildno: "{{ lookup('env', 'BUILD_NUMBER'}}"
+        buildno: "{{ lookup('env', 'BUILD_NUMBER') }}"
     - name: Get nmon chart target directory
       set_fact:
         targetdir: "{{ ansible_date_time.date }}-{{ buildno }}"
