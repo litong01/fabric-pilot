@@ -30,5 +30,5 @@
     - name: gather nmonchart
       fetch:
         src: "/opt/{{ hostvars[inventory_hostname].inter_name }}.html"
-        dest: "/var/www/html/{{ hostvars['cloud'].targetdir }}"
+        dest: "/var/www/html/{{ hostvars['cloud'].targetdir }}/"
         flat: yes
