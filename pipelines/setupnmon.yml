@@ -8,7 +8,7 @@
   tasks:
     - name: Unpack nmon binary
       unarchive:
-        src: "https://ayera.dl.sourceforge.net/project/nmon/nmon16g_x86.tar.gz"
+        src: "http://10.10.25.61/nmon16g_x86.tar.gz"
         dest: "/usr/local/bin"
         exclude:
           - nmon16g_x86_sles114
@@ -24,7 +24,7 @@
 
     - name: Unpack nmonchart binary
       unarchive:
-        src: "https://gigenet.dl.sourceforge.net/project/nmon/nmonchart33.tar"
+        src: "http://10.10.25.61/nmonchart33.tar"
         dest: "/usr/local/bin"
         exclude:
           - README
