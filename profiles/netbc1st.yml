@@ -82,7 +82,7 @@ fabric:
       zookeepers: []
   peer_db: CouchDB
   repo: 
-    bin: ""
+    bin: "https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric/linux-amd64-1.1.0-alpha/hyperledger-fabric-linux-amd64-1.1.0-alpha.tar.gz"
     url: hyperledger/
   ssh_user: ubuntu
   tls: true
