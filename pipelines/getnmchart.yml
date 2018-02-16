@@ -20,9 +20,12 @@
   become: true
   become_user: root
   tasks:
+    - name: combine the nmon chart files
+      shell: cat /opt/{{ hostvars[inventory_hostname].inter_name }}.nmon udp.csv > /opt/data.nmon
+
     - name: create nmonchart
       command: >-
-        nmonchart /opt/{{ hostvars[inventory_hostname].inter_name }}.nmon
+        nmonchart /opt/data.nmon
         /opt/{{ hostvars[inventory_hostname].inter_name }}.html
 
     - name: gather nmonchart

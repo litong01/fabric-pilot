@@ -26,16 +26,6 @@
       unarchive:
         src: "http://10.10.25.61/nmonchart33.tar"
         dest: "/usr/local/bin"
-        exclude:
-          - README
-          - nmon_upload.html
-          - nmon_upload.php
-          - nmonchart_cron
-          - nmonchart_license
-          - sampleC.html
-          - sampleC.nmon
-          - sampleD.html
-          - sampleD.nmon
         copy: no
         mode: +x
 

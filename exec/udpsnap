@@ -1,0 +1,1 @@
+echo UDPTRAFFIC,$1,`netstat -su | grep -A 5 "Udp:" | tail -5 | head -n 4 | awk '{print $1}' | paste -sd "," -` >> udp.csv
