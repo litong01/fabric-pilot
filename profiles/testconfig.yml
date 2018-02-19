@@ -1,7 +1,10 @@
 netbc1st:
   - name: "FAB-7246-4i"
-    extra: "tool_type=pte pteenv=2channels chaincode=samplejs testcase=FAB-7246-4i"
+    extra: "tool_type=pte pteenv=2channels chaincode=samplejs testcase=FAB-7246-4i testcase_query=FAB-7246-4i"
     skip_tags: "code,make,cleanfabric"
-  - name: "FAB-7627-16q"
-    extra: "tool_type=pte pteenv=8channels chaincode=samplecc testcase=FAB-7627-16q"
+  - name: "FAB-7334-4i"
+    extra: "tool_type=pte pteenv=2channels chaincode=samplejs testcase=FAB-7334-4i testcase_query=FAB-7334-4q"
+    skip_tags: "code,make,cleanfabric"
+  - name: "FAB-7627-16i"
+    extra: "tool_type=pte pteenv=8channels chaincode=samplecc testcase=FAB-7627-16i testcase_query=FAB-7627-16q"
     skip_tags: "code,make,cleanfabric"
