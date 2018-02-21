@@ -1,0 +1,28 @@
+--- 
+GERRIT_REFSPEC: ""
+GIT_URL: "http://gerrit.hyperledger.org/r/fabric"
+fabric: 
+  baseimage_tag: "x86_64-1.1.0-alpha"
+  ca: 
+    admin: admin
+    adminpw: adminpw
+  helper_tag: x86_64-1.1.0-preview
+  network: 
+    n1fabric001: 
+      cas: 
+        - ca1st.orga
+      kafkas: 
+        - kafka1st
+      orderers: 
+        - orderer1st.orgo
+      peers: 
+        - anchor@peer1st.orga
+        - worker@peer2nd.orga
+      zookeepers: 
+        - zookeeper1st
+  peer_db: CouchDB
+  repo: 
+    bin: "https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric/linux-amd64-1.1.0-alpha/hyperledger-fabric-linux-amd64-1.1.0-alpha.tar.gz"
+    url: hyperledger/
+  ssh_user: ubuntu
+  tls: true
