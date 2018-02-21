@@ -1,0 +1,70 @@
+
+# This is an example configuration file when use ubuntu image.
+horizon_url: "https://rtpstack5.rtp.raleigh.ibm.com"
+
+auth: {
+  auth_url: "https://rtpstack5.rtp.raleigh.ibm.com:5000/v3",
+  username: "{{ lookup('env','username') }}",
+  password: "{{ lookup('env','password') }}",
+  project_name: "hlfta",
+  domain_name: "ibm"
+}
+
+# This variable defines cloud provision attributes
+cluster: {
+  target_os: "ubuntu",
+  image_name: "ubuntu1604",
+  region_name: "",
+  ssh_user: "ubuntu",
+  availability_zone: "nova",
+  validate_certs: False,
+  private_net_name: "hlftanet",
+  flavor_name: "com.standard",
+  public_key_file: "{{ lookup('env','WORKSPACE') }}/fabric-test/cello/src/agent/ansible/run/publickey",
+  private_key_file: "{{ lookup('env','WORKSPACE') }}/fabric-test/cello/src/agent/ansible/run/privatekey",
+  # This variable indicate what IP should be used, only valid values are
+  # private_ip or public_ip
+  node_ip: "private_ip",
+  assign_public_ip: false,
+
+  container_network: {
+    Network: "172.16.0.0/16",
+    SubnetLen: 24,
+    SubnetMin: "172.16.0.0",
+    SubnetMax: "172.16.255.0",
+    Backend: {
+      Type: "udp",
+      Port: 8285
+    }
+  },
+
+  service_ip_range: "172.15.0.0/16",
+  dns_service_ip: "172.15.0.4",
+
+  # the section defines preallocated IP addresses for each node, if there is no
+  # preallocated IPs, leave it blank
+  node_ips: [],
+
+  # fabric network node names expect to be using a clear pattern, this defines
+  # the prefix for the node names.
+  name_prefix: "n1fabric",
+  domain: "n1net",
+
+  # stack_size determines how many virtual or physical machines we will have
+  # each machine will be named ${name_prefix}001 to ${name_prefix}${stack_size}
+  stack_size: 1,
+
+  etcdnodes: ["n1fabric001"],
+  builders: ["n1fabric001"],
+
+  flannel_repo: "http://10.10.25.61/fv0.7.1/flannel-v0.7.1-linux-amd64.tar.gz",
+  etcd_repo: "http://10.10.25.61/etcdv3.2.0/etcd-v3.2.0-linux-amd64.tar.gz",
+  k8s_repo: "http://10.10.25.61/k8sv1.7.0/",
+  go_repo: "http://10.10.25.61/golang/go1.9.2.linux-amd64.tar.gz",
+  
+  # If volume want to be used, specify a size in GB, make volume size 0 if wish
+  # not to use volume from your cloud
+  volume_size: 0,
+  # cloud block device name presented on virtual machines.
+  block_device_name: "/dev/vdb"
+}
