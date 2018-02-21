@@ -1,4 +1,0 @@
-netbc1st:
-  - name: "FAB-7246-4i"
-    extra: "tool_type=pte pteenv=2channels chaincode=samplejs testcase=FAB-7246-4i testcase_query=FAB-7246-4q"
-    skip_tags: "code,make,cleanfabric"
