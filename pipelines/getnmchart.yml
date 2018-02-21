@@ -5,9 +5,10 @@
     - name: Get a build number
       set_fact:
         buildno: "{{ lookup('env', 'BUILD_NUMBER') }}"
+        jobname: "{{ lookup('env', 'JOB_NAME') }}" 
     - name: Get nmon chart target directory
       set_fact:
-        targetdir: "{{ ansible_date_time.date }}B{{ buildno }}"
+        targetdir: "{{ ansible_date_time.date }}-{{ jobname }}-{{ buildno }}"
     - name: Setup hyperledger directory
       file:
         path: "/var/www/html/reports/{{ targetdir }}"
@@ -20,6 +21,9 @@
   become: true
   become_user: root
   tasks:
+    - name: stop the nmon daemon
+      shell: kill -USR2 $(pidof nmon16g_x86_ubuntu1604)
+
     - name: combine the nmon chart files
       shell: cat /opt/{{ hostvars[inventory_hostname].inter_name }}.nmon udp.csv > /opt/data.nmon
 
@@ -30,6 +34,6 @@
 
     - name: gather nmonchart
       fetch:
-        src: "/opt/{{ hostvars[inventory_hostname].inter_name }}.html"
+        src: "/opt/{{ hostvars[inventory_hostname].inter_name }}.{{ jobname }}.html"
         dest: "/var/www/html/reports/{{ hostvars['cloud'].targetdir }}/"
         flat: yes
