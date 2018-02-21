@@ -13,7 +13,7 @@ auth: {
 # This variable defines cloud provision attributes
 cluster: {
   target_os: "ubuntu",
-  image_name: "ubuntu1710",
+  image_name: "u1710",
   region_name: "",
   ssh_user: "ubuntu",
   availability_zone: "nova",
