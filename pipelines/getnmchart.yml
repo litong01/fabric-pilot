@@ -34,7 +34,7 @@
     - name: create nmonchart
       command: >-
         nmonchart /opt/data.nmon
-        /opt/{{ hostvars[inventory_hostname].inter_name }}.{{ jobname }}.html
+        /opt/{{ hostvars[inventory_hostname].inter_name }}.{{ jobname }}.{{ dtype }}.html
 
     - name: gather nmonchart
       fetch:
