@@ -651,13 +651,15 @@ chart_start NET
 $PRINTN "[{type: 'datetime', label: 'Datetime' },'"
 grep ^NET,N $INPUT | cut -f 3- -d, | sed -e "s/,$//"  -e "s/,/\',\'/g" -e "s/\$/\\']/" 
 grep ^NET,T $INPUT | \
-awk -F"," '{printf(",['\''%s'\''",$2); for(i=3; i<=NF; i++){if( i<=(((NF-2)/2+2)) ){printf(",%.1f",$i)} else {printf(",-%.1f",$i)}};printf("]\n")}'
+awk -F"," '{printf(",['\''%s'\''",$2); for(i=3; i<=12; i++){if( i<=(((12-2)/2+2)) ){printf(",%.1f",$i)} else {printf(",-%.1f",$i)}};printf("]\n")}'
 chart_end NET "Network Receive(read) & Send(write shown negatively) in KB per second" 0
 
 chart_start NETPACKET 
 $PRINTN "[{type: 'datetime', label: 'Datetime' },'"
 grep ^NETPACKET,N $INPUT | cut -f 3- -d, | sed -e "s/,$//"  -e "s/,/\',\'/g" -e "s/\$/\\']/" 
-grep ^NETPACKET,T $INPUT | sed -e "s/NETPACKET,/#\[\'/" -e "s/,/\',/"    -e "s/\$/\\]/" -e  "s/#/,/"
+grep ^NETPACKET,T $INPUT | \
+awk -F"," '{printf(",['\''%s'\''",$2); for(i=3; i<=12; i++){if( i<=(((12-2)/2+2)) ){printf(",%.1f",$i)} else {printf(",-%.1f",$i)}};printf("]\n")}'
+#sed -e "s/NETPACKET,/#\[\'/" -e "s/,/\',/"    -e "s/\$/\\]/" -e  "s/#/,/"
 chart_end NETPACKET "Network packet count per second" 0
 
 chart_start UDPTRAFFIC
@@ -1181,7 +1183,8 @@ TOPAWKS=/tmp/nmonchart.topawks.$$
 # Strip out end-of-line commas and add zeros for missing data from topas output!!!
 # Strip out "-0.0" and "-1.0" from Linux files - normally used as warning of errors or missing data
 INPUT=/tmp/nmonchart.input.$$
-sed -e 's///' -e 's/,,$//' -e 's/,$//' -e 's/,,/,0,/g' -e 's/-0.0/0.0/g' -e 's/-1.0/0.0/g' <$ORIGINAL >$INPUT
+sed -e 's/
+//' -e 's/,,$//' -e 's/,$//' -e 's/,,/,0,/g' -e 's/-0.0/0.0/g' -e 's/-1.0/0.0/g' <$ORIGINAL >$INPUT
 
 # --- do the bulk of the work and save in tmp file
 generate >$TMP
