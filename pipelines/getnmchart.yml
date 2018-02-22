@@ -5,7 +5,7 @@
     - name: Get a build number
       set_fact:
         buildno: "{{ lookup('env', 'BUILD_NUMBER') }}"
-        jobname: "{{ lookup('env', 'JOB_NAME') }}" 
+        jobname: "{{ lookup('env', 'JOB_NAME') }}"
     - name: Get nmon chart target directory
       set_fact:
         targetdir: "{{ ansible_date_time.date }}-{{ jobname }}-{{ buildno }}"
@@ -26,6 +26,10 @@
 
     - name: combine the nmon chart files
       shell: cat /opt/{{ hostvars[inventory_hostname].inter_name }}.nmon /opt/udp.csv > /opt/data.nmon
+
+    - name: get job name
+      set_fact:
+        jobname: "{{ lookup('env', 'JOB_NAME') }}"
 
     - name: create nmonchart
       command: >-
