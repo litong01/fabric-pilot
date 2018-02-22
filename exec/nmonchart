@@ -3,7 +3,7 @@
 # License GNU General Public License version 3.0 (GPLv3)
 # (c) Copyright 2015. Nigel Griffiths
 
-export nmonchart_version=31
+export nmonchart_version=33
 
 # Set wantCONFIG to 0 (zero) to switch off config button or 1 to switch it on
 wantCONFIG=1
@@ -224,6 +224,11 @@ chart_button TOPSUM    "Top Summary" black
 chart_button TOPCMD    "Top Commands" black
 fi
 
+if (( hasDISKBUSY1 ))
+then
+chart_button TOPDISK    "Top Disk" black
+fi
+
 $ECHO '\t<br>'
 #$ECHO '\t <hr>'
 }
@@ -284,35 +289,35 @@ chart()
 	awk -F , '
 	/^GPU_UTIL,N/ { print "[{type: '\''datetime'\'', label: '\''Datetime'\'' },'\''" $3 "'\'','\''"  $4 "'\'','\''"  $5 "'\'','\''" $6 "'\'']" }
 	/^GPU_UTIL,T/ { print ",['\''" $2 "'\''," $3 "," $4 "," $5 "," $6 "]" }
-	' <$INPUT
+	' <$GPUINPUT
 	;;
 
 	GPU_MEM) 
 	awk -F , '
 	/^GPU_MEM,N/ { print "[{type: '\''datetime'\'', label: '\''Datetime'\'' },'\''" $3 "'\'','\''"  $4 "'\'','\''"  $5 "'\'','\''" $6 "'\'']" }
 	/^GPU_MEM,T/ { print ",['\''" $2 "'\''," $3 "," $4 "," $5 "," $6 "]" }
-	' <$INPUT
+	' <$GPUINPUT
 	;;
 
 	GPU_TEMP) 
 	awk -F , '
 	/^GPU_TEMP,N/ { print "[{type: '\''datetime'\'', label: '\''Datetime'\'' },'\''" $3 "'\'','\''"  $4 "'\'','\''"  $5 "'\'','\''" $6 "'\'']" }
 	/^GPU_TEMP,T/ { print ",['\''" $2 "'\''," $3 "," $4 "," $5 "," $6 "]" }
-	' <$INPUT
+	' <$GPUINPUT
 	;;
 
 	GPU_WATTS) 
 	awk -F , '
 	/^GPU_WATTS,N/ { print "[{type: '\''datetime'\'', label: '\''Datetime'\'' },'\''" $3 "'\'','\''"  $4 "'\'','\''"  $5 "'\'','\''" $6 "'\'']" }
 	/^GPU_WATTS,T/ { print ",['\''" $2 "'\''," $3 "," $4 "," $5 "," $6 "]" }
-	' <$INPUT
+	' <$GPUINPUT
 	;;
 
 	GPU_MHZ) 
 	awk -F , '
 	/^GPU_MHZ,N/ { print "[{type: '\''datetime'\'', label: '\''Datetime'\'' },'\''" $3 "'\'','\''"  $4 "'\'','\''"  $5 "'\'','\''" $6 "'\'']" }
 	/^GPU_MHZ,T/ { print ",['\''" $2 "'\''," $3 "," $4 "," $5 "," $6 "]" }
-	' <$INPUT
+	' <$GPUINPUT
 	;;
 
 	CPU_UTIL) 
@@ -371,7 +376,20 @@ fi
 	/^MEMUSE,T/ { print ",['\''" $2 "'\''," $3 "," $4 "," $5 "]" }
 	' <$INPUT
 	;;
-	#;;
+
+#	MEMNEW) 
+#	awk -F , '
+#	/^MEMNEW,M/ { print "[{type: '\''datetime'\'', label: '\''Datetime'\'' },'\''" $3 "'\'','\''"  $4 "'\'','\''"  $5 "'\'','\''"  $6"'\'','\''"  $7"'\'','\''"  $8"'\'']" }
+#	/^MEMNEW,T/ { print ",['\''" $2 "'\''," $3 "," $4 "," $5 "," $6 "," $7 "," $8 "]" }
+#	' <$INPUT
+#	;;
+
+	MEMNEW) 
+	awk -F , '
+	/^MEMNEW,M/ { print "[{type: '\''datetime'\'', label: '\''Datetime'\'' },'\''" $3 "'\'','\''"  $4 "'\'','\''"  $5 "'\'','\''"  $6 "'\'']" }
+	/^MEMNEW,T/ { print ",['\''" $2 "'\''," $3 "," $4 "," $5 "," $6 "]" }
+	' <$INPUT
+	;;
 
 	RUNQ) 
 	awk -F , '
@@ -457,7 +475,7 @@ fi
 	' <$INPUT
 	;;
 
-	*) $ECHO Oh handling code for chart $1
+	*) $ECHO Oh dear, no code to handle chart name $1
 		;;
 	esac
 
@@ -503,6 +521,7 @@ then
  chart REALMEM "Real Memory - RAM in MB" 0
  chart VIRTMEM "Virtual Memory - Paging Space in MB" 0
  chart FSCACHE "Filesystem Cache Memory Use (numperm) Percentage" 0
+ chart MEMNEW "Memory Use System, Process, Cache & Free Memory Percentage" 1
 else 
  if(( hasCPUUTIL_ALL ))
  then
@@ -510,11 +529,15 @@ else
  fi
  if(( hasGPU ))
  then
+ # Work around that some system can have 1 GPU adapter/socket instead of the maximum of two
+ # Each adpater/socket has two GPUs so its two or four GPUs
+ grep ^GPU $INPUT | sed 's/$/,0,0/'  >$GPUINPUT
  chart GPU_UTIL  "NVidia GPU Utilisation Percent" 0
  chart GPU_MEM   "NVidia Memory Utilisation Percent" 0
  chart GPU_TEMP  "NVidia Temperature C" 0
  chart GPU_WATTS "NVidia Power Draw Watts" 0
  chart GPU_MHZ   "NVidia GPU MHz" 0
+ rm $GPUINPUT
  fi
 
  if(( hasMHZ ))
@@ -581,6 +604,47 @@ END {
 }'
 chart_end_column CPU_USE "Use of Logical CPU Core Threads - POWER=SMT or x86=Hyperthreads" 1
 
+if (( hasDISKBUSY1 ))
+then
+# TOPSUM Buble chart of CPU, I/O and RAM use
+chart_start TOPDISK 
+
+export DISKBUSY=/tmp/DISKBUSY.$$
+export DISKTMP1=/tmp/DISKTMP1.$$
+export DISKTMP2=/tmp/DISKTMP2.$$
+export DISKALL=/tmp/DISKALL.$$
+export DISK20=/tmp/DISK20.$$
+
+#extract all disks busy lines
+grep ^DISKBUSY $INPUT >$DISKBUSY
+
+#extract the zeroth disks busy lines as the base data
+grep ^DISKBUSY,  $DISKBUSY >$DISKALL
+
+for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+do
+    grep ^DISKBUSY$i, $DISKBUSY | cut -d "," -f 3- >$DISKTMP2
+    # if file zero bytes in length = we have processes all the DISKBUSYn lines
+    if [ ! -s $DISKTMP2 ]
+    then
+        break
+    fi
+    cp $DISKALL $DISKTMP1
+    paste $DISKTMP1 $DISKTMP2 >$DISKALL
+done
+
+columns=$(cat $DISKALL | awk -F , '{ for (i=1;i<=NF;i++) sum[i]+=$i;};
+   END { for(i in sum) print sum[i] " " i; }' | sort -nr | head -15 | cut -d " " -f 2 | awk '{ printf ","$1}')
+
+cut -d "," -f 1,2$columns <$DISKALL >$DISK20
+
+
+# Generate the JaveScript data Array
+$PRINTN "[{type: 'datetime', label: 'Datetime' },'"
+grep ^DISKBUSY,D $DISK20 | cut -f 3- -d, | sed  -e  "s/,/\',\'/g" -e  "s/\$/\\']/"
+grep ^DISKBUSY,T $DISK20 | sed -e "s/DISKBUSY,/#\[\'/" -e  "s/,/\',/"   -e  "s/\$/\\]/" -e  "s/#/,/"
+chart_end TOPDISK "Top 15 disks by sum(Busy%)" 0
+fi
 
 if (( hasTOP ))
 then
@@ -650,23 +714,20 @@ fi
 chart_start NET 
 $PRINTN "[{type: 'datetime', label: 'Datetime' },'"
 grep ^NET,N $INPUT | cut -f 3- -d, | sed -e "s/,$//"  -e "s/,/\',\'/g" -e "s/\$/\\']/" 
-grep ^NET,T $INPUT | \
-awk -F"," '{printf(",['\''%s'\''",$2); for(i=3; i<=12; i++){if( i<=(((12-2)/2+2)) ){printf(",%.1f",$i)} else {printf(",-%.1f",$i)}};printf("]\n")}'
+grep ^NET,T $INPUT | awk -F"," '{printf(",['\''%s'\''",$2); for(i=3; i<=12; i++) {printf(",%.1f",$i)}; printf("]\n")}'
 chart_end NET "Network Receive(read) & Send(write shown negatively) in KB per second" 0
 
 chart_start NETPACKET 
 $PRINTN "[{type: 'datetime', label: 'Datetime' },'"
 grep ^NETPACKET,N $INPUT | cut -f 3- -d, | sed -e "s/,$//"  -e "s/,/\',\'/g" -e "s/\$/\\']/" 
-grep ^NETPACKET,T $INPUT | \
-awk -F"," '{printf(",['\''%s'\''",$2); for(i=3; i<=12; i++){if( i<=(((12-2)/2+2)) ){printf(",%.1f",$i)} else {printf(",-%.1f",$i)}};printf("]\n")}'
-#sed -e "s/NETPACKET,/#\[\'/" -e "s/,/\',/"    -e "s/\$/\\]/" -e  "s/#/,/"
+grep ^NETPACKET,T $INPUT | awk -F"," '{printf(",['\''%s'\''",$2); for(i=3; i<=12; i++) {printf(",%.1f",$i)}; printf("]\n")}'
 chart_end NETPACKET "Network packet count per second" 0
 
-chart_start UDPTRAFFIC
+chart_start UDPTRAFFIC 
 $PRINTN "[{type: 'datetime', label: 'Datetime' },'"
-grep ^UDPTRAFFIC,N $INPUT | cut -f 3- -d, | sed -e  "s/,/\',\'/g" -e  "s/\$/\\']/"
-grep ^UDPTRAFFIC,T $INPUT | sed -e "s/UDPTRAFFIC,/#\[\'/" -e  "s/,/\',/"    -e  "s/\$/\\]/" -e  "s/#/,/"
-chart_end UDPTRAFFIC "Disk Read KB per second (Stacked)" 1
+grep ^UDPTRAFFIC,N $INPUT | cut -f 3- -d, | sed -e "s/,$//"  -e "s/,/\',\'/g" -e "s/\$/\\']/" 
+grep ^UDPTRAFFIC,T $INPUT | sed -e "s/UDPTRAFFIC,/#\[\'/" -e "s/,/\',/" -e "s/\$/\\]/" -e "s/#/,/"
+chart_end UDPTRAFFIC "UDP datagram count" 0
 
 
 if (( isAIX ))
@@ -846,6 +907,7 @@ chart_button FILEIO    "File I/O"  red
 chart_button REALMEM   "Real Mem"  blue
 chart_button VIRTMEM   "Virt Mem"  blue
 chart_button FSCACHE   "FS Cache"  blue
+chart_button MEMNEW    "MemUse"  blue
 chart_button PAGING    "Paging"    blue
 chart_button SWAPIN    "Swaping "  blue
 $ECHO '<br>' 
@@ -860,6 +922,7 @@ chart_button MORE3      "MORE3"      red
 fi
 chart_button NET       "Network"     purple
 chart_button NETPACKET "Net Packets" purple
+chart_button UDPTRAFFIC "Udp Datagram" purple
 if (( hasNETSIZE ))
 then
 chart_button NETSIZE   "Net Size" purple
@@ -915,11 +978,15 @@ if ((hasMHZ ))
  fi
 if ((hasGPU ))
  then
+	# Work around that some system can have 1 GPU adapter/socket instead of the maximum of two
+	# Each adpater/socket has two GPUs so its two or four GPUs
+	grep ^GPU $INPUT | sed 's/$/,0,0/'  >$GPUINPUT
 	chart_button GPU_UTIL  "GPU Util." green
 	chart_button GPU_MEM   "GPU Mem."  green
 	chart_button GPU_TEMP  "GPU Temp." green
 	chart_button GPU_WATTS "GPU Watts" green
 	chart_button GPU_MHZ   "GPU MHz"   green
+	rm $GPUINPUT
  fi
 chart_button RUNQ       "RunQ"     red
 if (( hasPROCCOUNT ))
@@ -942,8 +1009,7 @@ chart_button MORE3      "MORE3"      red
 fi
 chart_button NET        "Network"    purple
 chart_button NETPACKET  "Net Packet" purple
-chart_button UDPTRAFFIC "UDP Traff"  purple
-
+chart_button UDPTRAFFIC "Udp Datagram" purple
 if (( hasDISKs ))
 then
 chart_button DISKBUSY   "Disk Busy"  brown
@@ -1111,6 +1177,17 @@ else
         hasNETSIZE=0
 fi
 
+grep "^DISKBUSY1," $1>/dev/null
+if [[ $? == 0 ]]
+then
+        hasDISKBUSY1=1
+else
+        hasDISKBUSY1=0
+        # Remove the below line, if you want only the Top Disk graph for
+	# data collections more than 150 disks i.e. DISKBUSY1+ lines.
+        hasDISKBUSY1=1
+fi
+
 grep "^TOP,+PID" $1>/dev/null
 if [[ $? == 0 ]]
 then
@@ -1142,6 +1219,7 @@ then
 	if [[ $? == 0 ]]
 	then
 		hasGPU=1
+		GPUINPUT=/tmp/nmonchart.gpu.$$
 	fi
 
 	# Diskless machines only found in the Linux environment
@@ -1183,8 +1261,7 @@ TOPAWKS=/tmp/nmonchart.topawks.$$
 # Strip out end-of-line commas and add zeros for missing data from topas output!!!
 # Strip out "-0.0" and "-1.0" from Linux files - normally used as warning of errors or missing data
 INPUT=/tmp/nmonchart.input.$$
-sed -e 's/
-//' -e 's/,,$//' -e 's/,$//' -e 's/,,/,0,/g' -e 's/-0.0/0.0/g' -e 's/-1.0/0.0/g' <$ORIGINAL >$INPUT
+sed -e 's///' -e 's/,,$//' -e 's/,$//' -e 's/,,/,0,/g' -e 's/-0.0/0.0/g' -e 's/-1.0/0.0/g' <$ORIGINAL >$INPUT
 
 # --- do the bulk of the work and save in tmp file
 generate >$TMP
@@ -1214,4 +1291,8 @@ rm $TMP $SED* $INFO $INPUT
 if (( hasTOP ))
 then
 	rm $TOP $TOP20 $TOPAWKS 
+fi
+if (( hasDISKBUSY1 ))
+then
+	rm  -f $DISKBUSY $DISKTMP1 $DISKTMP2 $DISKALL $DISK20
 fi
