@@ -25,7 +25,7 @@
       shell: kill -USR2 $(pidof nmon16g_x86_ubuntu1604)
 
     - name: combine the nmon chart files
-      shell: cat /opt/{{ hostvars[inventory_hostname].inter_name }}.nmon /opt/udp.csv > /opt/data.nmon
+      shell: cat /opt/{{ hostvars[inventory_hostname].inter_name }}.{{ tname }}.nmon /opt/udp.csv > /opt/data.nmon
 
     - name: get job name
       set_fact:
@@ -34,10 +34,10 @@
     - name: create nmonchart
       command: >-
         nmonchart /opt/data.nmon
-        /opt/{{ hostvars[inventory_hostname].inter_name }}.{{ jobname }}.{{ dtype }}.html
+        /opt/{{ hostvars[inventory_hostname].inter_name }}.{{ jobname }}.{{ tname }}.html
 
     - name: gather nmonchart
       fetch:
-        src: "/opt/{{ hostvars[inventory_hostname].inter_name }}.{{ jobname }}.{{ dtype }}.html"
+        src: "/opt/{{ hostvars[inventory_hostname].inter_name }}.{{ jobname }}.{{ tname }}.html"
         dest: "/var/www/html/reports/{{ hostvars['cloud'].targetdir }}/"
         flat: yes
