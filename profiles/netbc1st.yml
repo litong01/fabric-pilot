@@ -2,11 +2,11 @@
 GERRIT_REFSPEC: ""
 GIT_URL: "http://gerrit.hyperledger.org/r/fabric"
 fabric: 
-  baseimage_tag: "x86_64-1.1.0-alpha"
+  baseimage_tag: "x86_64-1.0.6"
   ca: 
     admin: admin
     adminpw: adminpw
-  helper_tag: x86_64-1.1.0-preview
+  helper_tag: x86_64-1.0.6
   network: 
     wfabric001: 
       cas: 
