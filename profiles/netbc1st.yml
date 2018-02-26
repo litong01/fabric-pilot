@@ -2,7 +2,7 @@
 GERRIT_REFSPEC: ""
 GIT_URL: "http://gerrit.hyperledger.org/r/fabric"
 fabric: 
-  baseimage_tag: "x86_64-1.0.6"
+  baseimage_tag: ""
   ca: 
     admin: admin
     adminpw: adminpw
@@ -82,7 +82,7 @@ fabric:
       zookeepers: []
   peer_db: CouchDB
   repo: 
-    bin: "https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric/linux-amd64-1.1.0-alpha/hyperledger-fabric-linux-amd64-1.1.0-alpha.tar.gz"
+    bin: ""
     url: hyperledger/
   ssh_user: ubuntu
   tls: true
