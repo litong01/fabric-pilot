@@ -52,7 +52,7 @@ cluster: {
 
   # stack_size determines how many virtual or physical machines we will have
   # each machine will be named ${name_prefix}001 to ${name_prefix}${stack_size}
-  stack_size: 5,
+  stack_size: 10,
 
   etcdnodes: ["wfabric001", "wfabric002", "wfabric003"],
   builders: ["wfabric005"],
