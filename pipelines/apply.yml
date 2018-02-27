@@ -232,9 +232,6 @@
     - { name: "kafka-compose", flag: "{{ kafkas }}" }
     - { name: "orderer-compose", flag: "{{ orderers }}" }
     - { name: "peer-compose", flag: "{{ peers }}" }
-  environment:
-    DOCKER_HOST:"unix:///var/run/weave/weave.sock"
-    ORIG_DOCKER_HOST:""
   tags: "fabricup"
 
 - name: Locate a host to run peer channel create command
