@@ -155,7 +155,7 @@ fabric:
         - anchor@peer1st.orga28
         - worker@peer2nd.orga28
       zookeepers: []
-    wfabric00a: 
+    wfabric010: 
       cas: 
         - ca1st.orga29
         - ca1st.orga30
