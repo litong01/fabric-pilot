@@ -219,7 +219,7 @@
     - { name: "fabric-tools:{{ thetag }}", flag: "tools" }
   tags: "pullimages"
 
-- name: Pull necessary container images from the docker hub
+- name: Tag the chaincode container image
   command: "docker tag {{ fabric.repo.url }}fabric-ccenv:{{ thetag }} hyperledger/fabric-ccenv:{{ thetag }}"
 
 - name: Create docker compose files
