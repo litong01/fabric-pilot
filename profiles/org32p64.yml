@@ -1,0 +1,181 @@
+--- 
+GERRIT_REFSPEC: ""
+GIT_URL: "http://gerrit.hyperledger.org/r/fabric"
+fabric: 
+  baseimage_tag: "latest"
+  ca: 
+    admin: admin
+    adminpw: adminpw
+  helper_tag: latest
+  network: 
+    wfabric001: 
+      cas: 
+        - ca1st.orga1
+      kafkas: 
+        - kafka1st
+      orderers: 
+        - orderer1st.orgo
+      peers: 
+        - anchor@peer1st.orga1
+        - worker@peer2nd.orga1
+      zookeepers: 
+        - zookeeper1st
+    wfabric002: 
+      cas: 
+        - ca1st.orga2
+      kafkas: 
+        - kafka2nd
+      orderers: 
+        - orderer2nd.orgo
+      peers: 
+        - anchor@peer1st.orga2
+        - worker@peer2nd.orga2
+      zookeepers: 
+        - zookeeper2nd
+    wfabric003: 
+      cas: 
+        - ca1st.orga3
+        - ca1st.orga4
+      kafkas: 
+        - kafka3rd
+      orderers: 
+        - orderer2nd.orgo
+      peers: 
+        - anchor@peer1st.orga3
+        - worker@peer2nd.orga3
+        - anchor@peer1st.orga4
+        - worker@peer2nd.orga4
+      zookeepers: 
+        - zookeeper3rd
+    wfabric004: 
+      cas: 
+        - ca1st.orga5
+        - ca1st.orga6
+        - ca1st.orga7
+        - ca1st.orga8
+      kafkas: []
+      orderers: []
+      peers: 
+        - anchor@peer1st.orga5
+        - worker@peer2nd.orga5
+        - anchor@peer1st.orga6
+        - worker@peer2nd.orga6
+        - anchor@peer1st.orga7
+        - worker@peer2nd.orga7
+        - anchor@peer1st.orga8
+        - worker@peer2nd.orga8
+      zookeepers: []
+    wfabric005: 
+      cas: 
+        - ca1st.orga9
+        - ca1st.orga10
+        - ca1st.orga11
+        - ca1st.orga12
+      kafkas: []
+      orderers: []
+      peers: 
+        - anchor@peer1st.orga9
+        - worker@peer2nd.orga9
+        - anchor@peer1st.orga10
+        - worker@peer2nd.orga10
+        - anchor@peer1st.orga11
+        - worker@peer2nd.orga11
+        - anchor@peer1st.orga12
+        - worker@peer2nd.orga12
+      zookeepers: []
+    wfabric006: 
+      cas: 
+        - ca1st.orga13
+        - ca1st.orga14
+        - ca1st.orga15
+        - ca1st.orga16
+      kafkas: []
+      orderers: []
+      peers: 
+        - anchor@peer1st.orga13
+        - worker@peer2nd.orga13
+        - anchor@peer1st.orga14
+        - worker@peer2nd.orga14
+        - anchor@peer1st.orga15
+        - worker@peer2nd.orga15
+        - anchor@peer1st.orga16
+        - worker@peer2nd.orga16
+      zookeepers: []
+    wfabric007: 
+      cas: 
+        - ca1st.orga17
+        - ca1st.orga18
+        - ca1st.orga19
+        - ca1st.orga20
+      kafkas: []
+      orderers: []
+      peers: 
+        - anchor@peer1st.orga17
+        - worker@peer2nd.orga17
+        - anchor@peer1st.orga18
+        - worker@peer2nd.orga18
+        - anchor@peer1st.orga19
+        - worker@peer2nd.orga19
+        - anchor@peer1st.orga20
+        - worker@peer2nd.orga20
+      zookeepers: []
+    wfabric008: 
+      cas: 
+        - ca1st.orga21
+        - ca1st.orga22
+        - ca1st.orga23
+        - ca1st.orga24
+      kafkas: []
+      orderers: []
+      peers: 
+        - anchor@peer1st.orga21
+        - worker@peer2nd.orga21
+        - anchor@peer1st.orga22
+        - worker@peer2nd.orga22
+        - anchor@peer1st.orga23
+        - worker@peer2nd.orga23
+        - anchor@peer1st.orga24
+        - worker@peer2nd.orga24
+      zookeepers: []
+    wfabric009: 
+      cas: 
+        - ca1st.orga25
+        - ca1st.orga26
+        - ca1st.orga27
+        - ca1st.orga28
+      kafkas: []
+      orderers: []
+      peers: 
+        - anchor@peer1st.orga25
+        - worker@peer2nd.orga25
+        - anchor@peer1st.orga26
+        - worker@peer2nd.orga26
+        - anchor@peer1st.orga27
+        - worker@peer2nd.orga27
+        - anchor@peer1st.orga28
+        - worker@peer2nd.orga28
+      zookeepers: []
+    wfabric010: 
+      cas: 
+        - ca1st.orga29
+        - ca1st.orga30
+        - ca1st.orga31
+        - ca1st.orga32
+      kafkas: []
+      orderers: []
+      peers: 
+        - anchor@peer1st.orga29
+        - worker@peer2nd.orga29
+        - anchor@peer1st.orga30
+        - worker@peer2nd.orga30
+        - anchor@peer1st.orga31
+        - worker@peer2nd.orga31
+        - anchor@peer1st.orga32
+        - worker@peer2nd.orga32
+      zookeepers: []
+  peer_db: goleveldb
+  repo: 
+    bin: "http://10.10.25.61/flbin.tar.gz"
+    url: nexus3.hyperledger.org:10001/hyperledger/
+  ssh_user: ubuntu
+  tls: true
