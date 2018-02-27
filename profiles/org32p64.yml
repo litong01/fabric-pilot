@@ -6,7 +6,7 @@ fabric:
   ca: 
     admin: admin
     adminpw: adminpw
-  helper_tag: "x86_64-1.1.0-beta-snapshot-0a81773"
+  helper_tag: "latest"
   network: 
     wfabric001: 
       cas: 
