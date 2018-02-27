@@ -176,6 +176,8 @@ fabric:
   peer_db: goleveldb
   repo: 
     bin: "http://10.10.25.61/flbin.tar.gz"
+    username: "docker"
+    password: "docker"
     url: nexus3.hyperledger.org:10001/hyperledger/
   ssh_user: ubuntu
   tls: true
