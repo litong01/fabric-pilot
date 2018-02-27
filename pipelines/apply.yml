@@ -203,6 +203,8 @@
 
 - name: Pull necessary container images from the docker hub
   command: "docker pull {{ fabric.repo.url }}{{ item.name }}"
+  retries: 2
+  ignore_errors: yes
   when: item.flag | length > 0 and fabric.baseimage_tag | length > 0
   with_items:
     - { name: "fabric-ca:{{ helpertag }}", flag: "{{ cas }}" }
