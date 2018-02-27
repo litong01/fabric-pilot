@@ -219,6 +219,9 @@
     - { name: "fabric-tools:{{ thetag }}", flag: "tools" }
   tags: "pullimages"
 
+- name: Pull necessary container images from the docker hub
+  command: "docker tag {{ fabric.repo.url }}fabric-ccenv:{{ thetag }} hyperledger/fabric-ccenv:{{ thetag }}"
+
 - name: Create docker compose files
   template:
     src: "{{ playbook_dir }}/fabricsetup/templates/{{ item.name }}.j2"
