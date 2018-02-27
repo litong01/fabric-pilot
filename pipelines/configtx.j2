@@ -1,0 +1,84 @@
+---
+{% if allorgs | length > 0 %}
+Organizations:
+{% for org in allorgs %}
+  - &{{ org }}
+    Name: {{ org }}
+    ID: {{ org }}
+    MSPDir: {{ fabricworkdir }}/keyfiles/{{ org }}/msp
+    AdminPrincipal: Role.ADMIN
+    {% if org_anchor[org] is defined -%}
+    AnchorPeers:
+      - Host: {{ org_anchor[org].name }}
+        Port: 7051
+    {% endif %}
+
+{% endfor %}
+{% endif %}
+
+Orderer: &OrdererDefaults
+  OrdererType: kafka
+  Addresses:
+{%   for orderer in orderers %}
+    - {{ orderer.name }}:7050
+{%   endfor %}
+  BatchTimeout: 2s
+  BatchSize:
+    MaxMessageCount: 500
+    AbsoluteMaxBytes: 98 MB
+    PreferredMaxBytes: 512 KB
+{% if kafkas | length > 0 %}
+  Kafka:
+    Brokers:
+{%   for item in kafkas %}
+      - {{ item }}:9092
+{%   endfor %}
+{% endif %}
+  Organizations:
+{% for org in ordererorgs %}
+    - *{{ org }}
+{% endfor %}
+{% if project_version | version_compare('1.1.0','>=') %}
+  Capabilities:
+    <<: *OrdererCapabilities
+{% endif %}
+
+Application: &ApplicationDefaults
+  Organizations:
+{%   for org in peerorgs %}
+    - *{{ org }}
+{%   endfor %}
+
+Profiles:
+  OrgChannel:
+    Consortium: FabricConsortium
+    Application:
+      <<: *ApplicationDefaults
+{% if project_version | version_compare('1.1.0','>=') %}
+    Capabilities:
+      <<: *ApplicationCapabilities
+{% endif %}
+  OrdererGenesis:
+    Orderer:
+      <<: *OrdererDefaults
+{% if project_version | version_compare('1.1.0','>=') %}
+    Capabilities:
+      <<: *ChannelCapabilities
+{% endif %}
+    Consortiums:
+      FabricConsortium:
+        Organizations:
+{%   for org in peerorgs %}
+          - *{{ org }}
+{%   endfor %}
+{% if project_version | version_compare('1.1.0','>=') %}
+Capabilities:
+  Global: &ChannelCapabilities
+    V1_1: true
+
+  Orderer: &OrdererCapabilities
+    V1_1: true
+
+  Application: &ApplicationCapabilities
+    V1_1: true
+{% endif %}
