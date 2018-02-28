@@ -77,7 +77,8 @@ fabric:
         - ca1st.orga14
         - ca1st.orga15
         - ca1st.orga16
-      kafkas: []
+      kafkas:
+        - kafka4th
       orderers: []
       peers: 
         - anchor@peer1st.orga13
@@ -95,7 +96,8 @@ fabric:
         - ca1st.orga18
         - ca1st.orga19
         - ca1st.orga20
-      kafkas: []
+      kafkas:
+        - kafka5th
       orderers: []
       peers: 
         - anchor@peer1st.orga17
