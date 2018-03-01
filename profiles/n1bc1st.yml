@@ -2,27 +2,58 @@
 GERRIT_REFSPEC: ""
 GIT_URL: "http://gerrit.hyperledger.org/r/fabric"
 fabric: 
-  baseimage_tag: "x86_64-1.1.0-alpha"
+  baseimage_tag: "x86_64-1.1.0-beta-snapshot-30b44a6"
   ca: 
     admin: admin
     adminpw: adminpw
-  helper_tag: x86_64-1.1.0-preview
+  helper_tag: "latest"
   network: 
-    n1fabric001: 
+    wfabric001: 
       cas: 
-        - ca1st.orga
+        - ca1st.orga1
       kafkas: 
         - kafka1st
       orderers: 
         - orderer1st.orgo
       peers: 
-        - anchor@peer1st.orga
-        - worker@peer2nd.orga
+        - anchor@peer1st.orga1
       zookeepers: 
         - zookeeper1st
-  peer_db: CouchDB
+    wfabric002: 
+      cas: []
+      kafkas:
+        - kafka2nd
+      orderers: 
+        - orderer2nd.orgo
+      peers: 
+        - worker@peer2nd.orga1
+        - worker@peer3rd.orga1
+      zookeepers: 
+        - zookeeper2nd
+    wfabric003:
+      cas: 
+        - ca1st.orga2
+      kafkas: 
+        - kafka3rd
+      orderers: 
+        - orderer3rd.orgo
+      peers: 
+        - anchor@peer1st.orga2
+      zookeepers: 
+        - zookeeper3rd
+    wfabric004: 
+      cas: []
+      kafkas: []
+      orderers: []
+      peers: 
+        - worker@peer2nd.orga2
+        - worker@peer3rd.orga2
+      zookeepers: []
+  peer_db: goleveldb
   repo: 
-    bin: "https://nexus.hyperledger.org/content/repositories/releases/org/hyperledger/fabric/hyperledger-fabric/linux-amd64-1.1.0-alpha/hyperledger-fabric-linux-amd64-1.1.0-alpha.tar.gz"
-    url: hyperledger/
+    bin: "http://10.10.25.61/flbin.tar.gz"
+    username: "docker"
+    password: "docker"
+    url: nexus3.hyperledger.org:10001/hyperledger/
   ssh_user: ubuntu
   tls: true
