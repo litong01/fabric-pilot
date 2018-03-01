@@ -12,10 +12,10 @@ netbc1st:
     extra: "tool_type=pte pteenv=2channels chaincode=samplejs testcase=FAB-7204-4i testcase_query=FAB-7204-4q"
     skip_tags: "code,make,cleanfabric"
 n1bc1st:
- - name: "FAB-7334-4i"
+  - name: "FAB-7334-4i"
     extra: "tool_type=pte pteenv=2channels chaincode=samplejs testcase=FAB-7334-4i testcase_query=FAB-7204-4q"
     skip_tags: "code,make,cleanfabric"
- - name: "FAB-7204-4i"
+  - name: "FAB-7204-4i"
     extra: "tool_type=pte pteenv=2channels chaincode=samplejs testcase=FAB-7204-4i testcase_query=FAB-7204-4q"
     skip_tags: "code,make,cleanfabric"    
 org32p64:
