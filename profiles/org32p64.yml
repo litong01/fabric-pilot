@@ -2,7 +2,7 @@
 GERRIT_REFSPEC: ""
 GIT_URL: "http://gerrit.hyperledger.org/r/fabric"
 fabric: 
-  baseimage_tag: "x86_64-1.1.0-beta-snapshot-30b44a6"
+  baseimage_tag: "x86_64-1.1.0-rc1"
   ca: 
     admin: admin
     adminpw: adminpw
