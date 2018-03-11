@@ -33,8 +33,8 @@ cluster: {
     SubnetMin: "172.16.0.0",
     SubnetMax: "172.16.255.0",
     Backend: {
-      Type: "udp",
-      Port: 8285
+      Type: "ipip",
+      DirectRouting: True
     }
   },
 
@@ -57,9 +57,9 @@ cluster: {
   etcdnodes: ["wfabric001", "wfabric002", "wfabric003"],
   builders: ["wfabric008"],
 
-  flannel_repo: "http://10.10.25.61/fv0.7.1/flannel-v0.7.1-linux-amd64.tar.gz",
-  etcd_repo: "http://10.10.25.61/etcdv3.2.0/etcd-v3.2.0-linux-amd64.tar.gz",
-  k8s_repo: "http://10.10.25.61/k8sv1.7.0/",
+  flannel_repo: "http://10.10.25.61/fv0.10.0/flannel-v0.10.0-linux-amd64.tar.gz",
+  etcd_repo: "http://10.10.25.61/etcdv3.3.2/etcd-v3.3.2-linux-amd64.tar.gz",
+  k8s_repo: "http://10.10.25.61/k8sv1.9.1/",
   go_repo: "http://10.10.25.61/golang/go1.9.2.linux-amd64.tar.gz",
   
   # If volume want to be used, specify a size in GB, make volume size 0 if wish
