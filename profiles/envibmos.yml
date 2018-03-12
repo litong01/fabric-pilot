@@ -34,7 +34,7 @@ cluster: {
     SubnetMax: "172.16.255.0",
     Backend: {
       Type: "ipip",
-      DirectRouting: True
+      DirectRouting: False
     }
   },
 
