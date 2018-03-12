@@ -33,8 +33,8 @@ cluster: {
     SubnetMin: "172.16.0.0",
     SubnetMax: "172.16.255.0",
     Backend: {
-      Type: "ipip",
-      DirectRouting: False
+      Type: "udp",
+      Port: 8285
     }
   },
 
