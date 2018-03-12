@@ -1,1 +1,0 @@
-echo UDPTRAFFIC,$1,`nstat -z | grep 'UdpIn\|UdpOu\|UdpOut\|UdpSnd\|UdpRcv' | awk '{print $2}' | paste -sd "," -` >> udp.csv
