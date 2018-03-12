@@ -1,2 +1,2 @@
-echo "IPSTATS,NET,IpInReceives,IpInHdrErrors,IpInAddrErrors,IpForwDatagrams,IpInUnknownProtos,IpInDiscards,IpInDelivers,IpOutRequests,IpOutDiscards,IpOutNoRoutes" > udp.csv
-echo "UDPSTATS,NET,UdpInDatagrams,UdpInErrors,UdpOutDatagrams,UdpRcvbufErrors,UdpSndbufErrors,UdpInCsumErrors" >> udp.csv
+echo "IPSTATS,NET,IpInReceives,IpInHdrErrors,IpInAddrErrors,IpForwDatagrams,IpInUnknownProtos,IpInDiscards,IpInDelivers,IpOutRequests,IpOutDiscards,IpOutNoRoutes" > netstats.csv
+echo "UDPSTATS,NET,UdpInDatagrams,UdpInErrors,UdpOutDatagrams,UdpRcvbufErrors,UdpSndbufErrors,UdpInCsumErrors" >> netstats.csv
