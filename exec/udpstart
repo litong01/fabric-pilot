@@ -1,1 +1,0 @@
-echo "UDPTRAFFIC,NET,UdpInDatagrams,UdpInErrors,UdpOutDatagrams,UdpRcvbufErrors,UdpSndbufErrors,UdpInCsumErrors" >udp.csv
