@@ -33,7 +33,7 @@
       command: "nmon16g_x86_ubuntu1604 -fT -s 30 -m /opt -F {{ hostvars[inventory_hostname].inter_name }}.{{ tname }}.nmon"
       environment:
         NMON_TIMESTAMP: 0
-        NMON_START: udpstart
-        NMON_SNAP: udpsnap
+        NMON_START: netstart
+        NMON_SNAP: netsnap
         NMON_END: ""
         NMON_ONE_IN: 1
