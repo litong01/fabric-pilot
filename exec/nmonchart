@@ -711,23 +711,18 @@ fi
 
 # These lines have different numbers of stats depending on the machine config
 # Assuming we want all the stats on a line then fortunately we just need to format them
-chart_start NET 
-$PRINTN "[{type: 'datetime', label: 'Datetime' },'"
-grep ^NET,N $INPUT | cut -f 3- -d, | sed -e "s/,$//"  -e "s/,/\',\'/g" -e "s/\$/\\']/" 
-grep ^NET,T $INPUT | awk -F"," '{printf(",['\''%s'\''",$2); for(i=3; i<=12; i++) {printf(",%.1f",$i)}; printf("]\n")}'
-chart_end NET "Network Receive(read) & Send(write shown negatively) in KB per second" 0
 
-chart_start NETPACKET 
+chart_start IPSTATS 
 $PRINTN "[{type: 'datetime', label: 'Datetime' },'"
-grep ^NETPACKET,N $INPUT | cut -f 3- -d, | sed -e "s/,$//"  -e "s/,/\',\'/g" -e "s/\$/\\']/" 
-grep ^NETPACKET,T $INPUT | awk -F"," '{printf(",['\''%s'\''",$2); for(i=3; i<=12; i++) {printf(",%.1f",$i)}; printf("]\n")}'
-chart_end NETPACKET "Network packet count per second" 0
+grep ^IPSTATS,N $INPUT | cut -f 3- -d, | sed -e "s/,$//"  -e "s/,/\',\'/g" -e "s/\$/\\']/" 
+grep ^IPSTATS,T $INPUT | sed -e "s/IPSTATS,/#\[\'/" -e "s/,/\',/" -e "s/\$/\\]/" -e "s/#/,/"
+chart_end IPSTATS "IP Stats" 0
 
-chart_start UDPTRAFFIC 
+chart_start UDPSTATS 
 $PRINTN "[{type: 'datetime', label: 'Datetime' },'"
-grep ^UDPTRAFFIC,N $INPUT | cut -f 3- -d, | sed -e "s/,$//"  -e "s/,/\',\'/g" -e "s/\$/\\']/" 
-grep ^UDPTRAFFIC,T $INPUT | sed -e "s/UDPTRAFFIC,/#\[\'/" -e "s/,/\',/" -e "s/\$/\\]/" -e "s/#/,/"
-chart_end UDPTRAFFIC "UDP datagram count" 0
+grep ^UDPSTATS,N $INPUT | cut -f 3- -d, | sed -e "s/,$//"  -e "s/,/\',\'/g" -e "s/\$/\\']/" 
+grep ^UDPSTATS,T $INPUT | sed -e "s/UDPSTATS,/#\[\'/" -e "s/,/\',/" -e "s/\$/\\]/" -e "s/#/,/"
+chart_end UDPSTATS "UDP Stats" 0
 
 
 if (( isAIX ))
@@ -920,9 +915,8 @@ if (( hasMORE3 ))
 then
 chart_button MORE3      "MORE3"      red
 fi
-chart_button NET       "Network"     purple
-chart_button NETPACKET "Net Packets" purple
-chart_button UDPTRAFFIC "Udp Datagram" purple
+chart_button IPSTATS "IP Stats" purple
+chart_button UDPSTATS "UDP Stats" purple
 if (( hasNETSIZE ))
 then
 chart_button NETSIZE   "Net Size" purple
@@ -1007,9 +1001,8 @@ if (( hasMORE3 ))
 then
 chart_button MORE3      "MORE3"      red
 fi
-chart_button NET        "Network"    purple
-chart_button NETPACKET  "Net Packet" purple
-chart_button UDPTRAFFIC "Udp Datagram" purple
+chart_button IPSTATS "IP Stats" purple
+chart_button UDPSTATS "UDP Stats" purple
 if (( hasDISKs ))
 then
 chart_button DISKBUSY   "Disk Busy"  brown
@@ -1261,7 +1254,8 @@ TOPAWKS=/tmp/nmonchart.topawks.$$
 # Strip out end-of-line commas and add zeros for missing data from topas output!!!
 # Strip out "-0.0" and "-1.0" from Linux files - normally used as warning of errors or missing data
 INPUT=/tmp/nmonchart.input.$$
-sed -e 's///' -e 's/,,$//' -e 's/,$//' -e 's/,,/,0,/g' -e 's/-0.0/0.0/g' -e 's/-1.0/0.0/g' <$ORIGINAL >$INPUT
+sed -e 's/
+//' -e 's/,,$//' -e 's/,$//' -e 's/,,/,0,/g' -e 's/-0.0/0.0/g' -e 's/-1.0/0.0/g' <$ORIGINAL >$INPUT
 
 # --- do the bulk of the work and save in tmp file
 generate >$TMP

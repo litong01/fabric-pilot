@@ -1,3 +1,3 @@
 aa=`nstat -z|grep 'IpIn\|IpFor\|IpOut\|UdpIn\|UdpOu\|UdpOut\|UdpSnd\|UdpRcv'|awk '{print $2}'|paste -sd "," -`
-echo IPTRAFFIC,$1,`echo $aa|cut -f 1-10 -d ','` >> netstats.csv
-echo UDPTRAFFIC,$1,`echo $aa|cut -f 11-16 -d ','` >> netstats.csv
+echo IPSTATS,$1,`echo $aa|cut -f 1-10 -d ','` >> netstats.csv
+echo UDPSTATS,$1,`echo $aa|cut -f 11-16 -d ','` >> netstats.csv

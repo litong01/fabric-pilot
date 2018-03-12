@@ -27,7 +27,7 @@
       tags: killnmon
 
     - name: combine the nmon chart files
-      shell: cat /opt/{{ hostvars[inventory_hostname].inter_name }}.{{ tname }}.nmon /opt/udp.csv > /opt/data.nmon
+      shell: cat /opt/{{ hostvars[inventory_hostname].inter_name }}.{{ tname }}.nmon /opt/netstats.csv > /opt/data.nmon
 
     - name: get job name
       set_fact:
