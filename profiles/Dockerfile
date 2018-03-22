@@ -1,4 +1,4 @@
-FROM nexus3.hyperledger.org:10001/hyperledger/fabric-tools:x86_64-1.1.0-rc1
+FROM nexus3.hyperledger.org:10001/hyperledger/fabric-tools:x86_64-1.1.0
 
 ENV GOPATH /opt/gopath
 ENV GOROOT /opt/go
