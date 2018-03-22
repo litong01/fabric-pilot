@@ -52,7 +52,7 @@ fabric:
         - worker@peer2nd.orgb
         - worker@peer3rd.orgb
       zookeepers: []
-      wfabric005: 
+    wfabric005: 
       cas: []
       kafkas: []
       orderers: []
@@ -75,7 +75,7 @@ fabric:
       kafkas: []
       orderers: []
       peers: []
-zookeepers: []
+      zookeepers: []
   peer_db: goleveldb
   repo: 
     bin: "http://10.10.25.61/flbin.tar.gz"
