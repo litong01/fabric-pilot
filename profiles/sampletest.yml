@@ -57,4 +57,4 @@ fabric:
     bin: "http://10.10.25.61/flbin.tar.gz"
     url: hyperledger/
   ssh_user: ubuntu
-tls: true
+  tls: true
