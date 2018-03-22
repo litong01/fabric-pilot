@@ -22,3 +22,7 @@ org32p64:
   - name: "FAB-8208-64i"
     extra: "tool_type=pte pteenv=mh8channels chaincode=samplecc testcase=FAB-8208-64i testcase_query=FAB-8208-64q"
     skip_tags: "code,make,cleanfabric"
+sampletest:
+  - name: "Sample-Test"
+    extra: "tool_type=pte pteenv=2channels chaincode=samplecc"
+    skip_tags: "code,make,cleanfabric"
