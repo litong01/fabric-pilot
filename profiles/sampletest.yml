@@ -58,24 +58,6 @@ fabric:
       orderers: []
       peers: []
       zookeepers: []
-    wfabric006: 
-      cas: []
-      kafkas: []
-      orderers: []
-      peers: []
-      zookeepers: []
-    wfabric007: 
-      cas: []
-      kafkas: []
-      orderers: []
-      peers: []
-      zookeepers: []
-    wfabric008: 
-      cas: []
-      kafkas: []
-      orderers: []
-      peers: []
-      zookeepers: []
   peer_db: goleveldb
   repo: 
     bin: "http://10.10.25.61/flbin.tar.gz"
