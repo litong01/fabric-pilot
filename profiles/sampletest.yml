@@ -46,7 +46,6 @@ fabric:
       cas: []
       kafkas:
         - kafka4th
-        - kafka5th
       orderers: []
       peers: 
         - worker@peer2nd.orgb
@@ -54,7 +53,8 @@ fabric:
       zookeepers: []
     wfabric005: 
       cas: []
-      kafkas: []
+      kafkas:
+        - kafka5th
       orderers: []
       peers: []
       zookeepers: []
