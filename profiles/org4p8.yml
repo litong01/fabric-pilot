@@ -1,0 +1,73 @@
+--- 
+GERRIT_REFSPEC: ""
+GIT_URL: "http://gerrit.hyperledger.org/r/fabric"
+fabric: 
+  baseimage_tag: "x86_64-1.1.0"
+  ca: 
+    admin: admin
+    adminpw: adminpw
+    image_tag: x86_64-1.1.0
+  helper_tag: "x86_64-0.4.6"
+  network: 
+    wfabric001: 
+      cas: 
+        - ca1st.orga
+      kafkas: 
+        - kafka1st
+      orderers: 
+        - orderer1st.orgo
+      peers: 
+        - anchor@peer1st.orga
+        - worker@peer2nd.orga
+      zookeepers: 
+        - zookeeper1st
+    wfabric002: 
+      cas:
+        - ca1st.orgb
+      kafkas:
+        - kafka2nd
+      orderers: 
+        - orderer2nd.orgo
+      peers: 
+        - anchor@peer1st.orgb
+        - worker@peer2nd.orgb
+      zookeepers: 
+        - zookeeper2nd
+    wfabric003:
+      cas: 
+        - ca1st.orgc
+      kafkas: 
+        - kafka3rd
+      orderers: 
+        - orderer3rd.orgo
+      peers: 
+        - anchor@peer1st.orgc
+        - worker@peer2nd.orgc
+      zookeepers: 
+        - zookeeper3rd
+    wfabric004: 
+      cas:
+        - ca1st.orgd
+      kafkas:
+        - kafka4th
+      orderers:
+        - orderer4th.orgo
+      peers: 
+        - anchor@peer1st.orgd
+        - worker@peer2nd.orgd
+      zookeepers: []
+    wfabric005: 
+      cas:
+        - ca1st.orgo
+      kafkas:
+        - kafka5th
+      orderers:
+        - orderer5th.orgo
+      peers: []
+      zookeepers: []
+  peer_db: goleveldb
+  repo: 
+    bin: "http://10.10.25.61/flbin.tar.gz"
+    url: hyperledger/
+  ssh_user: ubuntu
+  tls: true
