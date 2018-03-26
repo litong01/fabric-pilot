@@ -6,7 +6,7 @@
 # This variable defines fabric network attributes
 pte: {
   ptechannels: [
-    {name: "testorgschannel1", orgs: ["orga", "orgb", "orgc", "orgd"], orderer: "orderer0"},
+    {name: "testorgschannel1", orgs: ["orga", "orgb", "orgc", "orgd"], orderer: "orderer0"}
   ],
   transaction: {
     transMode: "Constant",
