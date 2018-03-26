@@ -26,3 +26,7 @@ sampletest:
   - name: "Sample-Test"
     extra: "tool_type=pte pteenv=2channels chaincode=samplecc"
     skip_tags: "code,make,cleanfabric"
+org4p8:
+  - name: "4 orgs - 8 peers (endorsers) - 1 channel"
+    extra: "tool_type=pte pteenv=1channel4orgs chaincode=samplejs"
+    skip_tags: "code,make,cleanfabric"
