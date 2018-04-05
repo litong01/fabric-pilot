@@ -11,6 +11,7 @@ RUN set -eux; \
     && ln -s /usr/bin/python3 /usr/bin/python \
     && rm -rf /var/cache/apk/*
 
+ENV TESTROOT=/opt/fabrictest
 VOLUME /var/lib/docker
 EXPOSE 2375
 
