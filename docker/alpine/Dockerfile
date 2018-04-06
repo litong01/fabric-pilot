@@ -9,9 +9,10 @@ RUN set -eux; \
     nodejs nodejs-npm py-virtualenv go curl \
     && curl -fsSL https://clis.ng.bluemix.net/install/linux | sh \
     && ln -s /usr/bin/python3 /usr/bin/python \
+    && mkdir -p /opt/fabrictest \
     && rm -rf /var/cache/apk/*
 
-ENV TESTROOT=/opt/fabrictest
+ENV WORKDIR=/opt/fabrictest
 VOLUME /var/lib/docker
 EXPOSE 2375
 
