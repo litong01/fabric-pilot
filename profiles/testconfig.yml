@@ -21,12 +21,12 @@ n1bc1st:
 org32p64:
   - name: "FAB-8208-64i"
     extra: "tool_type=pte pteenv=mh8channels chaincode=samplecc testcase=FAB-8208-64i testcase_query=FAB-8208-64q"
-    skip_tags: "code,make,cleanfabric"
+    skip_tags: "code,make,cleanfabric,composersetup"
 sampletest:
   - name: "Sample-Test"
     extra: "tool_type=pte pteenv=2channels chaincode=samplecc"
-    skip_tags: "code,make,cleanfabric"
+    skip_tags: "code,make,cleanfabric,composersetup"
 org4p8:
   - name: "4orgs-8peers-endorsers-1channel"
     extra: "tool_type=pte pteenv=1channel4orgs chaincode=samplejs"
-    skip_tags: "code,make,cleanfabric"
+    skip_tags: "code,make,cleanfabric,composersetup"
